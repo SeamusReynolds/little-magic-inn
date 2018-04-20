@@ -20,7 +20,7 @@ public class Application {
         port(8008);
         
         // Set up routes
-        post(Path.Endpoint.AVAILABLE_ROOMS, RoomController.getAvailableRooms);
+        post(Path.Endpoint.AVAILABLE_ROOMS, new RoomController().getAvailableRooms);
         
         //Handle exceptions
         exception(ErrorResponseException.class, (exception, request, response) -> {

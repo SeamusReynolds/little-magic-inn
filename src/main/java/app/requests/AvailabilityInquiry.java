@@ -3,9 +3,9 @@ package app.requests;
 import java.util.Date;
 
 public class AvailabilityInquiry {
-    private Date date;
-    private Integer numberOfGuests;
-    private Integer amountOfLuggage;
+    protected Date date;
+    protected Integer numberOfGuests;
+    protected Integer amountOfLuggage;
     
     public Date getDate() {
         return date;
