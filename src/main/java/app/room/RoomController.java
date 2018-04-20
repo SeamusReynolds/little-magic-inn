@@ -16,7 +16,9 @@ import java.util.Set;
 
 public class RoomController {
     
-    private static Set<String> requiredParameters = new LinkedHashSet<>(ImmutableList.of("date", "guests", "luggage"));
+    private static Set<String> requiredParameters = new LinkedHashSet<>(ImmutableList.of("date",
+                                                                                         "numberOfGuests",
+                                                                                         "amountOfLuggage"));
     
     public static Route getAvailableRooms = (Request request, Response response) -> {
         validateRequest(request);
@@ -25,8 +27,12 @@ public class RoomController {
     };
     
     private static void validateRequest(Request request) {
-        if(!request.contentType().contains("json")) {
-            throw new ErrorResponseException("Expected json in POST body");
+        if(request.contentType() == null || !request.contentType().contains("json")) {
+            throw new ErrorResponseException("Expected Content-Type: application/json");
+        }
+        
+        if(request.body() == null || request.body().isEmpty()) {
+            throw new ErrorResponseException("Expecting body for POST request");
         }
         
         //Check that we have all required parameters

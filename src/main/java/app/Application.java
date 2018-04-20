@@ -5,6 +5,7 @@ import app.room.RoomController;
 import app.util.Filters;
 import app.util.JsonUtil;
 import app.util.Path;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class Application {
         port(8008);
         
         // Set up routes
-        get(Path.Endpoint.AVAILABLE_ROOMS, RoomController.getAvailableRooms);
+        post(Path.Endpoint.AVAILABLE_ROOMS, RoomController.getAvailableRooms);
         
         //Handle exceptions
         exception(ErrorResponseException.class, (exception, request, response) -> {
@@ -32,8 +33,9 @@ public class Application {
         });
         
         exception(RuntimeException.class, (exception, request, response) -> {
+            exception.printStackTrace();
             response.status(500);
-            response.body("INTERNAL SERVER ERROR\n\n" + exception);
+            response.body("INTERNAL SERVER ERROR\n\n" + ExceptionUtils.getStackTrace(exception));
         });
         
         enableDebugScreen();
