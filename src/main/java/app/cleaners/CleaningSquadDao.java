@@ -8,7 +8,7 @@ import java.util.Set;
 public class CleaningSquadDao {
     
     private static Set<CleaningSquad> cleaningSquads = new HashSet<>(ImmutableList.of(
-            new CleaningSquad("Gnocchi Gnomes", 8.0)
+            new CleaningSquad("Gnocchi Gnomes", 8.0, 15)
     ));
     
     public Set<CleaningSquad> getAllCleaningSquads() {
