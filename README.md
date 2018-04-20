@@ -11,8 +11,8 @@ Java 8, Spark, Jackson
 ## Running the application
 * Open the appropriate command-line tool for your environment
 * Navigate to the directory where you downloaded the application
-* For Unix-based systems, run the following command: './gradlew run'
-* For Windows-based systems, run the following command: './gradlew.bat'
+* For Unix-based systems, run the following command: `./gradlew run`
+* For Windows-based systems, run the following command: `./gradlew.bat run`
 
 ## Using the API
 ### Navigation
