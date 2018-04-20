@@ -1,9 +1,7 @@
 package app;
 
-import app.booking.BookingDao;
 import app.exception.ErrorResponseException;
 import app.room.RoomController;
-import app.room.RoomDao;
 import app.util.Filters;
 import app.util.JsonUtil;
 import app.util.Path;
@@ -16,23 +14,14 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Application {
 
-    // Declare dependencies
-    public static RoomDao roomDao;
-    public static BookingDao bookingDao;
-
     public static void main(String[] args) {
-
-        // Instantiate your dependencies
-        roomDao = new RoomDao();
-        bookingDao = new BookingDao();
-
         // Configure Spark
         port(8008);
         
-
         // Set up routes
         get(Path.Endpoint.AVAILABLE_ROOMS, RoomController.getAvailableRooms);
         
+        //Handle exceptions
         exception(ErrorResponseException.class, (exception, request, response) -> {
             ErrorResponseException errorResponse = (ErrorResponseException) exception;
             response.status(errorResponse.getStatusCode());
