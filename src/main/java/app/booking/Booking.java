@@ -21,6 +21,22 @@ public class Booking {
     public Integer availableBeds() { return room.getGuestCapacity() - numberOfGuests; }
     public Integer availableStorage() { return room.getStorageCapacity() - amountOfLuggage; }
     
+    public void addGuests(Integer numberOfGuestsToAdd) {
+        Integer result = numberOfGuests + numberOfGuestsToAdd;
+        if(result > room.getGuestCapacity()) {
+            throw new RuntimeException("Cannot add guests, insufficient capacity");
+        }
+        numberOfGuests = result;
+    }
+    
+    public void addLuggage(Integer amountOfLuggageToAdd) {
+        Integer result = amountOfLuggage + amountOfLuggageToAdd;
+        if(result > room.getStorageCapacity()) {
+            throw new RuntimeException("Cannot add guests, insufficient capacity");
+        }
+        amountOfLuggage = result;
+    }
+    
     public Date getDate() {
         return date;
     }

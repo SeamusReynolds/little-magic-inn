@@ -41,6 +41,8 @@ public class ReservationLedger {
     public Booking makeReservation(BookingRequest bookingRequest) {
         Booking bestRoom = getBestRoom(bookingRequest);
         if(bestRoom != null) {
+            bestRoom.addGuests(bookingRequest.getNumberOfGuests());
+            bestRoom.addLuggage(bookingRequest.getAmountOfLuggage());
             bookingDao.updateBooking(bestRoom);
         }
         
