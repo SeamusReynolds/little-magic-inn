@@ -34,4 +34,23 @@ public class Room {
     public void setStorageCapacity(Integer storageCapacity) {
         this.storageCapacity = storageCapacity;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        
+        Room room = (Room) o;
+    
+        return getRoomName().equals(room.getRoomName());
+    }
+    
+    @Override
+    public int hashCode() {
+        return getRoomName().hashCode();
+    }
 }

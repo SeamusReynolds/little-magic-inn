@@ -4,17 +4,13 @@ import java.util.*;
 
 public class BookingDao {
 
-    private static Map<Date, List<Booking>> bookings = new TreeMap<>();
+    private static Map<Date, Set<Booking>> bookings = new TreeMap<>();
 
-    public Iterable<Booking> getAllBookings() {
-        List<Booking> ret = new LinkedList<>();
-        for(List<Booking> bookingsOnDate : bookings.values()) {
-            ret.addAll(bookingsOnDate);
-        }
-        return ret;
+    public Set<Booking> getBookingsByDate(Date date) {
+        return bookings.getOrDefault(date, new TreeSet<>());
     }
-
-    public List<Booking> getBookingsByDate(Date date) {
-        return bookings.get(date);
+    
+    public void addBookingToDate(Booking booking) {
+        bookings.getOrDefault(booking.getDate(), new TreeSet<>()).add(booking);
     }
 }

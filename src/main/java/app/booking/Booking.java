@@ -17,6 +17,10 @@ public class Booking {
         this.amountOfLuggage = amountOfLuggage;
     }
     
+    public boolean isFull() { return numberOfGuests.equals(room.getGuestCapacity()); }
+    public Integer availableBeds() { return room.getGuestCapacity() - numberOfGuests; }
+    public Integer availableStorage() { return room.getStorageCapacity() - amountOfLuggage; }
+    
     public Date getDate() {
         return date;
     }
@@ -47,5 +51,29 @@ public class Booking {
     
     public void setAmountOfLuggage(Integer amountOfLuggage) {
         this.amountOfLuggage = amountOfLuggage;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        
+        Booking booking = (Booking) o;
+        
+        if(!getDate().equals(booking.getDate())) {
+            return false;
+        }
+        return getRoom().equals(booking.getRoom());
+    }
+    
+    @Override
+    public int hashCode() {
+        int result = getDate().hashCode();
+        result = 31 * result + getRoom().hashCode();
+        return result;
     }
 }
