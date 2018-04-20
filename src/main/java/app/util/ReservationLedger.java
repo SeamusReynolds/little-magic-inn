@@ -4,12 +4,14 @@ import app.booking.Booking;
 import app.booking.BookingDao;
 import app.cleaners.CleaningSquadDao;
 import app.requests.AvailabilityInquiry;
+import app.requests.BookingRequest;
 import app.room.Room;
 import app.room.RoomDao;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class ReservationLedger {
     
@@ -34,6 +36,34 @@ public class ReservationLedger {
         bookingDao = new BookingDao();
         roomDao = new RoomDao();
         cleaningSquadDao = new CleaningSquadDao();
+    }
+    
+    public Booking makeReservation(BookingRequest bookingRequest) {
+        Booking bestRoom = getBestRoom(bookingRequest);
+        if(bestRoom != null) {
+            bookingDao.updateBooking(bestRoom);
+        }
+        
+        return bestRoom;
+    }
+    
+    private Booking getBestRoom(BookingRequest bookingRequest) {
+        Set<Booking> availableRooms = getAvailableRooms(bookingRequest);
+        
+        //If there's a tie in points, it's fine to just pick one room for it, so we overwrite rooms that already
+        //had that score previously.
+        TreeMap<Integer, Booking> roomRankings = new TreeMap<>();
+        
+        //Assign each room a number of points based on how close to full this booking request would make it.
+        //The more points, the farther away from full it is. Try to get as close to a full room as possible.
+        for(Booking availableRoom : availableRooms) {
+            int points = 0;
+            points += availableRoom.availableBeds() - bookingRequest.getNumberOfGuests();
+            points += availableRoom.availableStorage() - bookingRequest.getAmountOfLuggage();
+            roomRankings.put(points, availableRoom);
+        }
+        
+        return roomRankings.isEmpty() ? null : roomRankings.firstEntry().getValue();
     }
     
     public Set<Booking> getAvailableRooms(AvailabilityInquiry inquiry) {
@@ -77,7 +107,7 @@ public class ReservationLedger {
         if(existingBookings.contains(booking)) {
             throw new RuntimeException("Tried to add booking for room/date that already has booking!");
         }
-        bookingDao.addBookingToDate(booking);
+        bookingDao.addBooking(booking);
     }
     
 }

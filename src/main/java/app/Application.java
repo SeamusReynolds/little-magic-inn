@@ -1,5 +1,6 @@
 package app;
 
+import app.booking.BookingController;
 import app.exception.ErrorResponseException;
 import app.room.RoomController;
 import app.util.Filters;
@@ -21,6 +22,7 @@ public class Application {
         
         // Set up routes
         post(Path.Endpoint.AVAILABLE_ROOMS, new RoomController().getAvailableRooms);
+        post(Path.Endpoint.CREATE_BOOKING, new BookingController().makeReservation);
         
         //Handle exceptions
         exception(ErrorResponseException.class, (exception, request, response) -> {
