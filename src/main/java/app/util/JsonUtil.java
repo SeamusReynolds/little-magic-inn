@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class JsonUtil {
     public static String dataToJson(Object data) {
@@ -24,7 +25,9 @@ public class JsonUtil {
     
     public static <T> T jsonToObject(String jsonText, Class<T> clazz) {
         try {
-            return new ObjectMapper().readValue(jsonText, clazz);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.setTimeZone(TimeZone.getDefault());
+            return objectMapper.readValue(jsonText, clazz);
         } catch (IOException e){
             throw new RuntimeException(e);
         }
@@ -32,6 +35,7 @@ public class JsonUtil {
     
     public static Map<String, Object> jsonToMap(String jsonText) {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setTimeZone(TimeZone.getDefault());
         TypeFactory typeFactory = mapper.getTypeFactory();
         MapType mapType = typeFactory.constructMapType(Map.class, String.class, Object.class);
         try {

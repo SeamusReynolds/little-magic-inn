@@ -18,12 +18,10 @@ public class RequestUtil {
         }
         
         try {
-            ret = formatter.parse(dateString);
+            return formatter.parse(dateString);
         } catch(ParseException e) {
             throw new ErrorResponseException("Invalid date format. Dates should be in format " + pattern);
         }
-        
-        return ret;
     }
 
 }
