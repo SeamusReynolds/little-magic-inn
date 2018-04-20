@@ -9,7 +9,7 @@ import java.util.Date;
 public class RequestUtil {
     
     public static Date getDate(String dateString) {
-        String pattern = "MM-dd-YYYY";
+        String pattern = "MM-dd-yyyy";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         Date ret = null;
         
