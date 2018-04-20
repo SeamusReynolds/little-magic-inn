@@ -112,4 +112,16 @@ public class ReservationLedger {
         bookingDao.addBooking(booking);
     }
     
+    protected Set<Booking> getActiveBookingsForDate(Date date) {
+        Set<Booking> bookingsForDate = getOrInitializeBookingsForDate(date);
+        Set<Booking> ret = new HashSet<>();
+        for(Booking booking : bookingsForDate) {
+            if(booking.needsCleaning()) {
+                ret.add(booking);
+            }
+        }
+        
+        return ret;
+    }
+    
 }

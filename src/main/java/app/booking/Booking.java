@@ -18,6 +18,7 @@ public class Booking {
     }
     
     public boolean isFull() { return numberOfGuests.equals(room.getGuestCapacity()); }
+    public boolean needsCleaning() { return numberOfGuests > 0; }
     public Integer availableBeds() { return room.getGuestCapacity() - numberOfGuests; }
     public Integer availableStorage() { return room.getStorageCapacity() - amountOfLuggage; }
     

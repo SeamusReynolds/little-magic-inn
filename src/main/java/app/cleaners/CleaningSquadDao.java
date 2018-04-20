@@ -2,15 +2,16 @@ package app.cleaners;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CleaningSquadDao {
     
-    private static List<CleaningSquad> cleaningSquads = ImmutableList.of(
-            new CleaningSquad(8, 1.0, 0.5)
-    );
+    private static Set<CleaningSquad> cleaningSquads = new HashSet<>(ImmutableList.of(
+            new CleaningSquad("Gnocchi Gnomes", 8.0)
+    ));
     
-    public List<CleaningSquad> getAllCleaningSquads() {
+    public Set<CleaningSquad> getAllCleaningSquads() {
         return cleaningSquads;
     }
     
