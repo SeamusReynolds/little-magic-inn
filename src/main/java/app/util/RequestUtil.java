@@ -11,7 +11,6 @@ public class RequestUtil {
     public static Date getDate(String dateString) {
         String pattern = "MM-dd-yyyy";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-        Date ret = null;
         
         if(dateString == null || dateString.isEmpty()) {
             throw new ErrorResponseException("Date string was empty or null");
