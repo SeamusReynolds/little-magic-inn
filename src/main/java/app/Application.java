@@ -45,7 +45,7 @@ public class Application {
         enableDebugScreen();
 
         //Set up after-filters (called after each get/post)
-        after("*", Filters.addJsonHeader);
+        after("*", Filters.addJsonHeaders);
 
     }
 
