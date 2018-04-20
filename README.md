@@ -4,20 +4,20 @@ This project is an answer to the interview coding project proposed by Ovia Healt
 ## Technologies Used
 Java 8, Spark, Jackson
 
-##Setting up your environment
+## Setting up your environment
 * Install JRE 1.8 or higher on your machine if it isn't installed already (it probably is).
 * Pull the code down to your local machine, either using Git or downloading the zip file and extracting it.
 
-##Running the application
+## Running the application
 * Open the appropriate command-line tool for your environment
 * Navigate to the directory where you downloaded the application
 * For Unix-based systems, run the following command: './gradlew run'
 * For Windows-based systems, run the following command: './gradlew.bat'
 
-##Using the API
-###Navigation
+## Using the API
+### Navigation
 The base route for the API is 'http://localhost:8008/api/v1'
-###Available Rooms Endpoint
+### Available Rooms Endpoint
 Route: `/availableRooms`
 
 Method: POST
@@ -58,7 +58,7 @@ POST Response Body Example:
     }
 ]
 ```
-###Request Booking Endpoint
+### Request Booking Endpoint
 Route: `/booking`
 
 Method: POST
@@ -87,7 +87,7 @@ POST Response Body Example:
 }
 ```
 
-###Cleaner Schedule Endpoint
+### Cleaner Schedule Endpoint
 Route: `/booking?date={MM-dd-yyy}`
 
 Method: GET
@@ -131,7 +131,7 @@ GET Response Body Example:
 ]
 ```
 
-##Project Questions
+## Project Questions
 >At a high level, how does your system work? 
 
 At a high level, this application works by keeping track of each bookable room (Room), the reservations made on 
