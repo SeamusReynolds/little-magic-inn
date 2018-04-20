@@ -8,8 +8,8 @@ import app.room.Room;
 import app.room.RoomDao;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class ReservationLedger {
     
@@ -38,7 +38,7 @@ public class ReservationLedger {
     
     public Set<Booking> getAvailableRooms(AvailabilityInquiry inquiry) {
         Set<Booking> bookingsForDate = getOrInitializeBookingsForDate(inquiry.getDate());
-        Set<Booking> availableRooms = new TreeSet<>();
+        Set<Booking> availableRooms = new HashSet<>();
         
         for(Booking booking : bookingsForDate) {
             if(bookingValidForInquiry(booking, inquiry)) {

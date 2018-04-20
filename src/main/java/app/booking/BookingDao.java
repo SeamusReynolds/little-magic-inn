@@ -11,6 +11,8 @@ public class BookingDao {
     }
     
     public void addBookingToDate(Booking booking) {
-        bookings.getOrDefault(booking.getDate(), new HashSet<>()).add(booking);
+        Set<Booking> bookingsOnDate = bookings.getOrDefault(booking.getDate(), new HashSet<>());
+        bookingsOnDate.add(booking);
+        bookings.put(booking.getDate(), bookingsOnDate);
     }
 }
